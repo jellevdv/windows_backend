@@ -1,4 +1,6 @@
-﻿namespace windows_backend.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace windows_backend.Models
 {
     public class Task
     {
@@ -8,6 +10,8 @@
         #endregion
 
         #region Properties
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int id { get; set; }
         public string Description { get; set; }
         public bool IsDone { get; set; }
         #endregion

@@ -1,11 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using windows_backend.Models;
 
 namespace windows_backend.Data.Mappers
 {
-    public class TaskConfiguration
+    public class TaskConfiguration : IEntityTypeConfiguration<Task>
     {
+        public void Configure(EntityTypeBuilder<Task> builder)
+        {
+            builder.HasKey(t => t.id);
+
+            builder.Property(t => t.Description).IsRequired();
+            builder.Property(t => t.IsDone).IsRequired();
+
+        }
     }
 }
