@@ -10,26 +10,30 @@ namespace windows_backend.Models
     {
         #region fields
         public string _name;
-        public IEnumerable<Task> _tasks;
+        public IEnumerable<ItemTask> _tasks;
+        public Category _category;
         #endregion
 
         #region properties
+
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id { get; set; }
-        public string Name;
-        public IEnumerable<Task> Tasks;
+        public string Name { get; set; }
+        public IEnumerable<ItemTask> Tasks { get; set; }
+        public Category Category { set; get; }
+
         #endregion
 
         #region constructor
         public Item(string name)
         {
             Name = name;
-            Tasks = new List<Task>();
+            Tasks = new List<ItemTask>();
         }
         #endregion
 
         #region methods
-        public void addTask(Task task)
+        public void addTask(ItemTask task)
         {
             Tasks.Append(task);
         }

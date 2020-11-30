@@ -4,9 +4,9 @@ using windows_backend.Models;
 
 namespace windows_backend.Data.Mappers
 {
-    public class TaskConfiguration : IEntityTypeConfiguration<Task>
+    public class TaskConfiguration : IEntityTypeConfiguration<ItemTask>
     {
-        public void Configure(EntityTypeBuilder<Task> builder)
+        public void Configure(EntityTypeBuilder<ItemTask> builder)
         {
             builder.HasKey(t => t.id);
 

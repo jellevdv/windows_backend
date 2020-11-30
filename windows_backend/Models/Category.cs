@@ -17,6 +17,8 @@ namespace windows_backend.Models
         #region properties
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id { get; set; }
+        public Holiday Holiday { get;  set; }
+
         public string Name;
         public string Description;
         public IEnumerable<Item> Items;
