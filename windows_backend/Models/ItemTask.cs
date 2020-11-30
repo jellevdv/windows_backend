@@ -1,19 +1,21 @@
 ﻿namespace windows_backend.Models
 {
-    public class Task
+    public class ItemTask
     {
         #region fiels
         public string _description;
         public bool _isDone;
+        public Item _item;
         #endregion
 
         #region Properties
         public string Description { get; set; }
         public bool IsDone { get; set; }
+        public Item Item { get; set; }
         #endregion
 
         #region constructor
-        public Task(string description)
+        public ItemTask(string description)
         {
             Description = description;
             IsDone = false;
