@@ -26,8 +26,6 @@ namespace windows_backend.Models
         }
         #endregion
 
-        
-
         #region methods
         public void TaskChecked()
         {

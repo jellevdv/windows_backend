@@ -13,9 +13,8 @@ namespace windows_backend.Models
         public IEnumerable<User> _users;
         public IEnumerable<Category> _categories;
         public DateTime _departuredate;
-
-
         #endregion
+
         #region Properties
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id { get; set; }
@@ -24,7 +23,7 @@ namespace windows_backend.Models
         public string Destination { get; set; }
         public IEnumerable<User> Users { get; set; }
         public IEnumerable<Category> Categories { get; set; }
-        public DateTime DepartureDate;
+        public DateTime DepartureDate { get; set; }
         #endregion
 
         #region constructor
