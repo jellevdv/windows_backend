@@ -17,7 +17,7 @@ namespace windows_backend.Models
 
         #region Properties
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string Destination { get; set; }
@@ -39,7 +39,15 @@ namespace windows_backend.Models
         #endregion
 
         #region methods
+        public void AddCategory(Category category)
+        {
+            throw new NotImplementedException();
+        }
 
+        public void AddUser(User user)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
 
     }

@@ -33,11 +33,15 @@ namespace windows_backend.Models
         #endregion
 
         #region methods
-        public void addTask(ItemTask task)
+        public void AddTask(ItemTask task)
         {
             Tasks.Append(task);
         }
 
+        public void EditTask(ItemTask originalTask, ItemTask editedTask)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
     }
 }
