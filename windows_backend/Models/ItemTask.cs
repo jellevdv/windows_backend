@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace windows_backend.Models
 {
@@ -13,7 +14,20 @@ namespace windows_backend.Models
         #region Properties
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id { get; set; }
-        public string Description { get; set; }
+        public string Description {
+            get
+            {
+                return _description;
+            }
+            set
+            {
+                if (String.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException("Description can't be empty");
+                }
+                _description = value;
+            }
+        }
         public bool IsDone { get; set; }
         public Item Item { get; set; }
         #endregion
@@ -22,6 +36,11 @@ namespace windows_backend.Models
         public ItemTask(string description)
         {
             Description = description;
+            IsDone = false;
+        }
+
+        public ItemTask()
+        {
             IsDone = false;
         }
         #endregion
