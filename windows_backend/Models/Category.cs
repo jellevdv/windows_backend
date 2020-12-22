@@ -27,6 +27,7 @@ namespace windows_backend.Models
                 {
                     throw new ArgumentException("Name can't be empty");
                 }
+                _name = value;
             } 
         }
         public string Description {
@@ -40,6 +41,7 @@ namespace windows_backend.Models
                 {
                     throw new ArgumentException("Description can't be empty");
                 }
+                _description = value;
             }
         }
         public List<Item> Items { get; set; }

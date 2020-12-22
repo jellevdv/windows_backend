@@ -9,12 +9,6 @@ namespace windows_backend.Tests.Models
     {
         private readonly string _validName = "Name";
         private readonly string _validDescription = "Description";
-        private readonly Holiday _validHoliday;
-
-        public CategoryTest()
-        {
-            _validHoliday = new Holiday();
-        }
 
         #region Constructor
 
