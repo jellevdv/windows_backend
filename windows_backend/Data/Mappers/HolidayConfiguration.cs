@@ -12,7 +12,7 @@ namespace windows_backend.Data.Mappers
     {
         public void Configure(EntityTypeBuilder<Holiday> builder)
         {
-            builder.HasKey(h => h.id);
+            builder.HasKey(h => h.Id);
 
             builder.Property(h => h.Name).IsRequired().HasMaxLength(50);
             builder.Property(h => h.Description).IsRequired();

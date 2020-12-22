@@ -42,12 +42,12 @@ namespace windows_backend.Data.Repositories
 
         public async Task<List<Holiday>> GetAll()
         {
-            return await _holidays.OrderBy(h => h.id).ToListAsync();
+            return await _holidays.OrderBy(h => h.Id).ToListAsync();
         }
 
         public async Task<Holiday> GetBy(int id)
         {
-            return await _holidays.SingleOrDefaultAsync(h => h.id == id);
+            return await _holidays.SingleOrDefaultAsync(h => h.Id == id);
         }
 
         public async Task SaveChanges()
