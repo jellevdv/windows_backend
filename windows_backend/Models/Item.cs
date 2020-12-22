@@ -29,6 +29,11 @@ namespace windows_backend.Models
             Name = name;
             Tasks = new List<ItemTask>();
         }
+
+        public Item()
+        {
+            Tasks = new List<ItemTask>();
+        }
         #endregion
 
         #region methods

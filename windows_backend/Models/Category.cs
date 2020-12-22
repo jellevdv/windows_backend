@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 
 namespace windows_backend.Models
 {
@@ -9,16 +10,39 @@ namespace windows_backend.Models
         #region fields
         public string _name;
         public string _description;
-        public IEnumerable<Item> _items;
         #endregion
 
         #region properties
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id { get; set; }
-        public IEnumerable<Holiday> Holidays { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public IEnumerable<Item> Items { get; set; }
+        public List<Holiday> Holidays { get; set; }
+        public string Name {
+            get
+            {
+                return _name;
+            }
+            set 
+            {
+                if (String.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException("Name can't be empty");
+                }
+            } 
+        }
+        public string Description {
+            get
+            {
+                return _description;
+            }
+            set
+            {
+                if (String.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException("Description can't be empty");
+                }
+            }
+        }
+        public List<Item> Items { get; set; }
         #endregion
 
         #region constructor
@@ -29,22 +53,41 @@ namespace windows_backend.Models
             Items = new List<Item>();
             Holidays = new List<Holiday>();
         }
+
+        public Category()
+        {
+            Items = new List<Item>();
+            Holidays = new List<Holiday>();
+        }
         #endregion
 
         #region methods
         public void AddItem(Item item)
         {
-            throw new NotImplementedException();
+            if (Items.Contains(item))
+            {
+                throw new ArgumentException("Item is already added.");
+            }
+            Items.Add(item);
         }
 
-        public void EditItem()
+        public void EditItem(Item oldItem, Item newItem)
         {
-            throw new NotImplementedException();
+            if (!Items.Contains(oldItem))
+            {
+                throw new ArgumentException("Item doesn't exist.");
+            }
+            oldItem.Name = newItem.Name;
+            oldItem.Tasks = newItem.Tasks;
         }
 
-        public void AsignToHolidays(Holiday holiday)
+        public void AsignToHoliday(Holiday holiday)
         {
-            throw new NotImplementedException();
+            if (Holidays.Contains(holiday))
+            {
+                throw new ArgumentException("Holiday is already added.");
+            }
+            Holidays.Add(holiday);
         }
         #endregion
     }

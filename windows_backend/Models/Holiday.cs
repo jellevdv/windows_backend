@@ -36,6 +36,12 @@ namespace windows_backend.Models
             Categories = new List<Category>();
             DepartureDate = departuredate;
         }
+
+        public Holiday()
+        {
+            Users = new List<User>();
+            Categories = new List<Category>();
+        }
         #endregion
 
         #region methods
