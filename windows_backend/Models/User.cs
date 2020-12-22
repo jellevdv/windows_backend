@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace windows_backend.Models
+﻿namespace windows_backend.Models
 {
     public class User
     {

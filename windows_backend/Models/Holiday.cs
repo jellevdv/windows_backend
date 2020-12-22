@@ -27,7 +27,7 @@ namespace windows_backend.Models
         #endregion
 
         #region constructor
-        public Holiday(string name,string destination, string description, DateTime departuredate)
+        public Holiday(string name, string destination, string description, DateTime departuredate)
         {
             Name = name;
             Description = description;

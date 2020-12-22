@@ -50,13 +50,13 @@ namespace windows_backend.Data.Repositories
             return await _categories.SingleOrDefaultAsync(c => c.id == id);
         }
 
-        
+
         public async Task<List<Category>> GetByHoliday(int holidayId)
         {
             return null;
-         //   return await _categories.Where(c => c.Holidays.id  == holidayId).ToListAsync();
+            //   return await _categories.Where(c => c.Holidays.id  == holidayId).ToListAsync();
         }
-        
+
 
         public async Task SaveChanges()
         {

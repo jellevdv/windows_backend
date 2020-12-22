@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace windows_backend.Models
 {
@@ -17,7 +15,7 @@ namespace windows_backend.Models
         #region properties
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id { get; set; }
-        public IEnumerable<Holiday> Holidays { get;  set; }
+        public IEnumerable<Holiday> Holidays { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public IEnumerable<Item> Items { get; set; }

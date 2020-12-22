@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
 using windows_backend.Models;
 
 namespace windows_backend.Data.Mappers
@@ -10,7 +9,7 @@ namespace windows_backend.Data.Mappers
 
         public void Configure(EntityTypeBuilder<Category> builder)
         {
-            
+
             builder.HasKey(c => c.id);
 
             builder.Property(c => c.Name).IsRequired().HasMaxLength(50);

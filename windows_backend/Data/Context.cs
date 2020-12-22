@@ -13,7 +13,7 @@ namespace windows_backend.Data
         public DbSet<ItemTask> Tasks { get; set; }
         public DbSet<User> Users { get; set; }
 
-        public Context(DbContextOptions<Context> options): base(options) { }
+        public Context(DbContextOptions<Context> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

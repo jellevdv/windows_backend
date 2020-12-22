@@ -5,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using windows_backend.Data;
 using windows_backend.Data.Repositories;
-using windows_backend.Models;
 using windows_backend.Models.Interfaces;
 
 namespace windows_backend
@@ -24,13 +23,33 @@ namespace windows_backend
         {
             services.AddDbContext<Context>();//options =>
 
-             // options.UseSqlServer(Configuration.GetConnectionString("DataContext")).EnableSensitiveDataLogging());
+            // options.UseSqlServer(Configuration.GetConnectionString("DataContext")).EnableSensitiveDataLogging());
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IHolidayRepository, HolidayRepository>();
             services.AddScoped<IItemRepository, ItemRepository>();
             services.AddScoped<ITaskRepository, TaskRepository>();
             services.AddScoped<DataInitializer>();
             services.AddControllers();
+            /*
+            services.AddSwaggerDocument();
+
+            services.AddOpenApiDocument(c =>
+            {
+                c.DocumentName = "apidocs";
+                c.Title = "Back-End ApiTest";
+                c.Version = "v1";
+                c.Description = "Hier gaan we testen of de Back-End volledig werkt";
+                c.AddSecurity("JWT", Enumerable.Empty<string>(), new OpenApiSecurityScheme
+                {
+                    Type = OpenApiSecuritySchemeType.ApiKey,
+                    Name = "Authorization",
+                    In = OpenApiSecurityApiKeyLocation.Header,
+                    Description = "Copy 'Bearer' + valid JWT token into field"
+                });
+                c.OperationProcessors.Add(
+                    new AspNetCoreOperationSecurityScopeProcessor("JWT")); //adds the token when a request is send
+            });
+            */
 
         }
 
