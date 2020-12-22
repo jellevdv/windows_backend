@@ -9,7 +9,6 @@ namespace windows_backend.Models
     {
         #region fields
         public string _name;
-        public IEnumerable<ItemTask> _tasks;
         public Category _category;
         #endregion
 
@@ -17,8 +16,21 @@ namespace windows_backend.Models
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id { get; set; }
-        public string Name { get; set; }
-        public IEnumerable<ItemTask> Tasks { get; set; }
+        public string Name {
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                if (String.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException("Name can't be empty");
+                }
+                _name = value;
+            }
+        }
+        public List<ItemTask> Tasks { get; set; }
         public Category Category { set; get; }
 
         #endregion
@@ -39,12 +51,21 @@ namespace windows_backend.Models
         #region methods
         public void AddTask(ItemTask task)
         {
-            Tasks.Append(task);
+            if (Tasks.Contains(task))
+            {
+                throw new ArgumentException("Task is already added.");
+            }
+            Tasks.Add(task);
         }
 
-        public void EditTask(ItemTask originalTask, ItemTask editedTask)
+        public void EditTask(ItemTask oldTask, ItemTask newTask)
         {
-            throw new NotImplementedException();
+            if (!Tasks.Contains(oldTask))
+            {
+                throw new ArgumentException("Item doesn't exist.");
+            }
+            oldTask.Description = newTask.Description;
+            oldTask.IsDone = newTask.IsDone;
         }
         #endregion
     }
