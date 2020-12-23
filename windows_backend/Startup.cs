@@ -26,11 +26,12 @@ namespace windows_backend
             services.AddDbContext<Context>(options =>
 
              options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddScoped<DataInitializer>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IHolidayRepository, HolidayRepository>();
             services.AddScoped<IItemRepository, ItemRepository>();
             services.AddScoped<ITaskRepository, TaskRepository>();
-            services.AddScoped<DataInitializer>();
+        
             services.AddControllers();
 
             services.AddSwaggerGen(c =>
@@ -42,7 +43,7 @@ namespace windows_backend
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DataInitializer dataInitializer)
         {
             if (env.IsDevelopment())
             {
@@ -67,6 +68,8 @@ namespace windows_backend
             {
                 endpoints.MapControllers();
             });
+
+            dataInitializer.InitializeData().Wait();
         }
     }
 }

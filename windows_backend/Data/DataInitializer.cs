@@ -31,10 +31,15 @@ namespace windows_backend.Data
                 Item item7 = new Item("Zwemvliezen");
                 Item item8 = new Item("Boeken");
                 Item item9 = new Item("Ipad");
-                for (int i = 1; i < 10; i++)
-                {
-                    _dbContext.Add($"item{i}");
-                }
+                _dbContext.Add(item1);
+                _dbContext.Add(item2);
+                _dbContext.Add(item3);
+                _dbContext.Add(item4);
+                _dbContext.Add(item5);
+                _dbContext.Add(item6);
+                _dbContext.Add(item7);
+                _dbContext.Add(item8);
+                _dbContext.Add(item9);
                 _dbContext.SaveChanges();
 
 
@@ -42,7 +47,7 @@ namespace windows_backend.Data
                 Category cat1 = new Category("Elektronica", "Elektronische apparaten");
                 Category cat2 = new Category("Handbagage", "Handbagage");
                 Category cat3 = new Category("Toiletgerief", "Toiletgerief");
-                Category cat4 = new Category("Zwwemgerief", "Alles om te zwemmen");
+                Category cat4 = new Category("Zwemgerief", "Alles om te zwemmen");
                 Category cat5 = new Category("EHBO", "Medische zaken");
                 _dbContext.Categories.Add(cat1);
                 _dbContext.Categories.Add(cat2);

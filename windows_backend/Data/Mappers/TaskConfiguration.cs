@@ -8,6 +8,7 @@ namespace windows_backend.Data.Mappers
     {
         public void Configure(EntityTypeBuilder<ItemTask> builder)
         {
+            builder.ToTable("Task");
             builder.HasKey(t => t.id);
 
             builder.Property(t => t.Description).IsRequired();

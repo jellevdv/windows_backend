@@ -8,13 +8,15 @@ namespace windows_backend.Data.Mappers
     {
         public void Configure(EntityTypeBuilder<Holiday> builder)
         {
+            builder.ToTable("Holiday");
             builder.HasKey(h => h.Id);
 
             builder.Property(h => h.Name).IsRequired().HasMaxLength(50);
             builder.Property(h => h.Description).IsRequired();
             builder.Property(h => h.Destination).IsRequired();
-            builder.Property(h => h.Users);
-            builder.Property(h => h.Categories);
+            //  builder.Property(h => h.Users);
+            builder.HasMany(h => h.Categories).WithMany(c => c.Holidays);
+          //  builder.Property(h => h.Categories);
             builder.Property(h => h.DepartureDate).IsRequired();
         }
     }
