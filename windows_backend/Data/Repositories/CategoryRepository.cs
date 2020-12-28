@@ -26,6 +26,7 @@ namespace windows_backend.Data.Repositories
                 throw new ArgumentException("Category is already in the database!");
             }
             await _categories.AddAsync(category);
+            _context.SaveChanges();
         }
 
 
@@ -34,6 +35,7 @@ namespace windows_backend.Data.Repositories
             if (await _categories.ContainsAsync(category))
             {
                 _categories.Remove(category);
+                _context.SaveChanges();
             }
             else
             {

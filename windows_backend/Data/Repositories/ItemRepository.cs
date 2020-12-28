@@ -28,6 +28,7 @@ namespace windows_backend.Data.Repositories
                 throw new ArgumentException("Item is already in the database!");
             }
             await _items.AddAsync(item);
+            _context.SaveChanges();
         }
 
         public async Task Delete(Item item)
@@ -35,6 +36,7 @@ namespace windows_backend.Data.Repositories
             if (await _items.ContainsAsync(item))
             {
                 _items.Remove(item);
+                _context.SaveChanges();
             }
             else
             {

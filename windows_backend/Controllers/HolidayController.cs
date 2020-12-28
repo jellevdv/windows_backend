@@ -58,11 +58,30 @@ namespace windows_backend.Controllers
             }
         }
 
+        //GET: api/GetCategoriesOfHoliday
+        /// <summary>
+        /// Get categories of a certain holiday 
+        /// </summary>
+        /// <returns>array of categories</returns>
+        [HttpGet("Categories")]
+        public async Task<List<Category>> GetCategoriesOfHoliday(int holidayId)
+        {
+            try
+            {
+                return await _holidayRepo.GetCategories(holidayId);
+            }
+            catch (Exception e)
+            {
+                BadRequest("Holiday not found! " + e.Message);
+                return null;
+            }
+        }
+
         //POST: api/AddHoliday
         /// <summary>
         /// Add holiday
         /// </summary>
-        [HttpPost]
+        [HttpPost("Holiday")]
         public async Task AddHoliday(Holiday holiday)
         {
             try
@@ -72,6 +91,23 @@ namespace windows_backend.Controllers
             catch (Exception e)
             {
                 BadRequest("Holiday not added! " + e.Message);
+            }
+        }
+
+        //POST: api/AddHoliday
+        /// <summary>
+        /// Add holiday
+        /// </summary>
+        [HttpPost("Category")]
+        public async Task AddCategory(int id, Category category)
+        {
+            try
+            {
+                await _holidayRepo.AddCategory(id, category);
+            }
+            catch (Exception e)
+            {
+                BadRequest("Category not added! " + e.Message);
             }
         }
 
@@ -92,6 +128,8 @@ namespace windows_backend.Controllers
                 BadRequest("Holiday not deleted! " + e.Message);
             }
         }
+
+
 
     }
 }
