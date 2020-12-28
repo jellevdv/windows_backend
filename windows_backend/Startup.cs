@@ -33,11 +33,10 @@ namespace windows_backend
             services.AddScoped<ITaskRepository, TaskRepository>();
         
             services.AddControllers();
+            services.AddSwaggerDocument();
 
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
-            });
+
+
 
 
         }
@@ -53,9 +52,10 @@ namespace windows_backend
             app.UseHttpsRedirection();
 
             app.UseRouting();
-            app.UseSwaggerUI();
 
-            app.UseSwagger();
+            app.UseOpenApi();
+            app.UseSwaggerUi3();
+
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");

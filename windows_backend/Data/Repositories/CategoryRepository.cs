@@ -28,6 +28,7 @@ namespace windows_backend.Data.Repositories
             await _categories.AddAsync(category);
         }
 
+
         public async Task Delete(Category category)
         {
             if (await _categories.ContainsAsync(category))
