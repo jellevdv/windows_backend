@@ -14,8 +14,8 @@ namespace windows_backend.Models
 
         #region properties
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int id { get; set; }
-        public List<Holiday> Holidays { get; set; }
+        public int Id { get; set; }
+        public List<HolidayCategory> Holidays { get; set; }
         public string Name {
             get
             {
@@ -53,13 +53,13 @@ namespace windows_backend.Models
             Name = name;
             Description = description;
             Items = new List<Item>();
-            Holidays = new List<Holiday>();
+            Holidays = new List<HolidayCategory>();
         }
 
         public Category()
         {
             Items = new List<Item>();
-            Holidays = new List<Holiday>();
+            Holidays = new List<HolidayCategory>();
         }
         #endregion
 
@@ -81,15 +81,6 @@ namespace windows_backend.Models
             }
             oldItem.Name = newItem.Name;
             oldItem.Tasks = newItem.Tasks;
-        }
-
-        public void AsignToHoliday(Holiday holiday)
-        {
-            if (Holidays.Contains(holiday))
-            {
-                throw new ArgumentException("Holiday is already added.");
-            }
-            Holidays.Add(holiday);
         }
         #endregion
     }

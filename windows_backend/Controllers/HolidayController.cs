@@ -13,11 +13,11 @@ namespace windows_backend.Controllers
     [ApiConventionType(typeof(DefaultApiConventions))]
     public class HolidayController : ControllerBase
     {
-        private readonly IHolidayRepository _holidayRepo;
+        private readonly IHolidayService _holidayService;
 
-        public HolidayController(IHolidayRepository holidayRepo)
+        public HolidayController(IHolidayService holidayService)
         {
-            _holidayRepo = holidayRepo;
+            _holidayService = holidayService;
         }
 
         // GET: api/Holidays
@@ -28,15 +28,7 @@ namespace windows_backend.Controllers
         [HttpGet]
         public async Task<IEnumerable<Holiday>> GetHolidays()
         {
-            try
-            {
-                return await _holidayRepo.GetAll();
-            }
-            catch (Exception e)
-            {
-                BadRequest("Holidays not found! " + e.Message);
-                return null;
-            }
+            return await _holidayService.GetHolidays();
         }
 
         //GET: api/GetHolidayById
@@ -47,15 +39,7 @@ namespace windows_backend.Controllers
         [HttpGet("Holiday")]
         public async Task<Holiday> GetHolidayById(int holidayId)
         {
-            try
-            {
-                return await _holidayRepo.GetBy(holidayId);
-            }
-            catch (Exception e)
-            {
-                BadRequest("Holiday not found! " + e.Message);
-                return null;
-            }
+            return await _holidayService.GetHolidayById(holidayId);
         }
 
         //GET: api/GetCategoriesOfHoliday
@@ -64,17 +48,9 @@ namespace windows_backend.Controllers
         /// </summary>
         /// <returns>array of categories</returns>
         [HttpGet("Categories")]
-        public async Task<List<Category>> GetCategoriesOfHoliday(int holidayId)
+        public async Task<List<HolidayCategory>> GetCategories(int id)
         {
-            try
-            {
-                return await _holidayRepo.GetCategories(holidayId);
-            }
-            catch (Exception e)
-            {
-                BadRequest("Holiday not found! " + e.Message);
-                return null;
-            }
+            return await _holidayService.GetCategories(id);
         }
 
         //POST: api/AddHoliday
@@ -84,14 +60,7 @@ namespace windows_backend.Controllers
         [HttpPost("Holiday")]
         public async Task AddHoliday(Holiday holiday)
         {
-            try
-            {
-                await _holidayRepo.Add(holiday);
-            }
-            catch (Exception e)
-            {
-                BadRequest("Holiday not added! " + e.Message);
-            }
+            await _holidayService.AddHoliday(holiday);
         }
 
         //POST: api/AddHoliday
@@ -101,14 +70,7 @@ namespace windows_backend.Controllers
         [HttpPost("Category")]
         public async Task AddCategory(int id, Category category)
         {
-            try
-            {
-                await _holidayRepo.AddCategory(id, category);
-            }
-            catch (Exception e)
-            {
-                BadRequest("Category not added! " + e.Message);
-            }
+            await _holidayService.AddCategory(id, category);
         }
 
 
@@ -119,17 +81,7 @@ namespace windows_backend.Controllers
         [HttpDelete]
         public async Task DeleteHoliday(Holiday holiday)
         {
-            try
-            {
-                await _holidayRepo.Delete(holiday);
-            }
-            catch (Exception e)
-            {
-                BadRequest("Holiday not deleted! " + e.Message);
-            }
+            await _holidayService.DeleteHoliday(holiday);
         }
-
-
-
     }
 }

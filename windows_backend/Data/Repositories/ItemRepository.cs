@@ -28,7 +28,7 @@ namespace windows_backend.Data.Repositories
                 throw new ArgumentException("Item is already in the database!");
             }
             await _items.AddAsync(item);
-            _context.SaveChanges();
+            await SaveChanges();
         }
 
         public async Task Delete(Item item)
@@ -36,7 +36,7 @@ namespace windows_backend.Data.Repositories
             if (await _items.ContainsAsync(item))
             {
                 _items.Remove(item);
-                _context.SaveChanges();
+                await SaveChanges();
             }
             else
             {
@@ -53,17 +53,17 @@ namespace windows_backend.Data.Repositories
         #region GetMethods
         public async Task<List<Item>> GetAll()
         {
-            return await _items.OrderBy(i => i.id).ToListAsync();
+            return await _items.OrderBy(i => i.Id).ToListAsync();
         }
 
         public async Task<Item> GetBy(int id)
         {
-            return await _items.SingleOrDefaultAsync(i => i.id == id);
+            return await _items.SingleOrDefaultAsync(i => i.Id == id);
         }
 
         public async Task<List<Item>> GetByCategory(int categoryId)
         {
-            return await _items.Where(i => i.Category.id == categoryId).ToListAsync();
+            return await _items.Where(i => i.Category.Id == categoryId).ToListAsync();
         }
         #endregion
 

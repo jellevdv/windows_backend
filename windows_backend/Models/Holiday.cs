@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 
 namespace windows_backend.Models
 {
@@ -59,7 +60,7 @@ namespace windows_backend.Models
             }
         }
         public List<User> Users { get; set; }
-        public List<Category> Categories { get; set; }
+        public List<HolidayCategory> Categories { get; set; }
         public DateTime DepartureDate { get; set; }
         #endregion
 
@@ -70,25 +71,27 @@ namespace windows_backend.Models
             Description = description;
             Destination = destination;
             Users = new List<User>();
-            Categories = new List<Category>();
+            Categories = new List<HolidayCategory>();
             DepartureDate = departuredate;
         }
 
         public Holiday()
         {
             Users = new List<User>();
-            Categories = new List<Category>();
+            Categories = new List<HolidayCategory>();
         }
         #endregion
 
         #region methods
         public void AddCategory(Category category)
         {
-            if (Categories.Contains(category))
+            if (Categories.Where(c => c.CategoryId == category.Id).Any())
             {
                 throw new ArgumentException("Category is already added.");
             }
-            Categories.Add(category);
+            HolidayCategory holidayCategory = new HolidayCategory(this, category);
+            Categories.Add(holidayCategory);
+            category.Holidays.Add(holidayCategory);
         }
 
         public void AddUser(User user)

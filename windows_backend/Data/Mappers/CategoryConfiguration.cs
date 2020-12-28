@@ -11,7 +11,7 @@ namespace windows_backend.Data.Mappers
         {
             builder.ToTable("Category");
 
-            builder.HasKey(c => c.id);
+            builder.HasKey(c => c.Id);
 
             builder.Property(c => c.Name).IsRequired().HasMaxLength(50);
             builder.Property(c => c.Description).IsRequired();

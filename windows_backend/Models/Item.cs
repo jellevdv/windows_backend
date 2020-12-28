@@ -15,7 +15,8 @@ namespace windows_backend.Models
         #region properties
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int id { get; set; }
+        public int Id { get; set; }
+        public int CategoryId { get; set; }
         public string Name {
             get
             {

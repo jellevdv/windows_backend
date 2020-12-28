@@ -96,32 +96,5 @@ namespace windows_backend.Tests.Models
         }
 
         #endregion
-
-        #region AsignToHoliday
-
-        [Fact]
-        public void AsignToHoliday_ValidHoliday_AsignsToHoliday()
-        {
-            Holiday holiday = new Holiday();
-            Category category = new Category();
-
-            category.AsignToHoliday(holiday);
-
-            Assert.NotEmpty(category.Holidays);
-        }
-
-        [Fact]
-        public void AsignToHoliday_NonValidHoliday_ThrowsArgumentException()
-        {
-            Holiday holiday = new Holiday();
-            Category category = new Category();
-
-            category.AsignToHoliday(holiday);
-
-            Assert.Throws<ArgumentException>(() => category.AsignToHoliday(holiday));
-        }
-
-        #endregion
-
     }
 }

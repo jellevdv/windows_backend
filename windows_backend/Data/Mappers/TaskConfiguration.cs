@@ -9,10 +9,17 @@ namespace windows_backend.Data.Mappers
         public void Configure(EntityTypeBuilder<ItemTask> builder)
         {
             builder.ToTable("Task");
-            builder.HasKey(t => t.id);
+            builder.HasKey(t => t.Id);
 
-            builder.Property(t => t.Description).IsRequired();
-            builder.Property(t => t.IsDone).IsRequired();
+            builder.Property(t => t.Description)
+                .IsRequired();
+
+            builder.Property(t => t.IsDone)
+                .IsRequired();
+
+            builder.HasOne(t => t.Item)
+                .WithMany(i => i.Tasks)
+                .HasForeignKey(t => t.ItemId);
 
         }
     }

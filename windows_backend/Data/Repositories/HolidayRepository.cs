@@ -26,14 +26,14 @@ namespace windows_backend.Data.Repositories
                 throw new ArgumentException("Holiday is already in the database!");
             }
             await _holidays.AddAsync(holiday);
-            _context.SaveChanges();
+            await SaveChanges();
         }
 
         public async Task AddCategory(int id, Category category)
         {
             Holiday holiday = await _holidays.SingleOrDefaultAsync(h => h.Id == id);
             holiday.AddCategory(category);
-            _context.SaveChanges();
+            await SaveChanges();
         }
 
         public async Task Delete(Holiday holiday)
@@ -41,7 +41,7 @@ namespace windows_backend.Data.Repositories
             if (await _holidays.ContainsAsync(holiday))
             {
                 _holidays.Remove(holiday);
-                _context.SaveChanges();
+                await SaveChanges();
             }
             else
             {
@@ -59,10 +59,10 @@ namespace windows_backend.Data.Repositories
             return await _holidays.SingleOrDefaultAsync(h => h.Id == id);
         }
 
-        public async Task<List<Category>> GetCategories(int id)
+        public async Task<List<HolidayCategory>> GetCategories(int id)
         {
             //todo error meldingen
-            Holiday holiday = await _holidays.SingleOrDefaultAsync(h => h.Id == id);
+            Holiday holiday = await GetBy(id);
             return holiday.Categories.ToList();
         }
 
@@ -71,7 +71,7 @@ namespace windows_backend.Data.Repositories
             //todo meldingen
             List<Item> items = new List<Item>();
             Holiday holiday = await _holidays.SingleOrDefaultAsync(h => h.Id == id);
-            holiday.Categories.ForEach(c => c.Items.ForEach(d => items.Add(d)));
+            holiday.Categories.ForEach(c => c.Category.Items.ForEach(d => items.Add(d)));
             return items;
         }
 

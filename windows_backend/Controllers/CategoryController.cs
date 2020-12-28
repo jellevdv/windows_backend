@@ -15,18 +15,13 @@ namespace windows_backend.Controllers
     [ApiConventionType(typeof(DefaultApiConventions))]
     public class CategoryController : ControllerBase
     {
-        private readonly ICategoryRepository _categoryRepository;
-        private readonly IItemRepository _itemRepository;
-        private readonly ITaskRepository _taskRepository;
+        private readonly ICategoryService _categoryService;
 
-        public CategoryController(ICategoryRepository categoryRepository, IItemRepository itemRepository, ITaskRepository taskRepository)
+        public CategoryController(ICategoryService categoryService)
         {
-            _categoryRepository = categoryRepository;
-            _itemRepository = itemRepository;
-            _taskRepository = taskRepository;
+            _categoryService = categoryService;
         }
-
-
+        
         #region Categories
         // GET: api/Categories
         /// <summary>
@@ -36,15 +31,7 @@ namespace windows_backend.Controllers
         [HttpGet("Categories")]
         public async Task<IEnumerable<Category>> GetCategories()
         {
-            try
-            {
-                return await _categoryRepository.GetAll();
-            }
-            catch (Exception e)
-            {
-                BadRequest("Categories not found! " + e.Message);
-                return null;
-            }
+            return await _categoryService.GetCategories();
         }
 
         //GET: api/GetCategoryById
@@ -53,17 +40,9 @@ namespace windows_backend.Controllers
         /// </summary>
         /// <returns>category</returns>
         [HttpGet("CategoryById")]
-        public async Task<Category> GetCategoryById(int catId)
+        public async Task<Category> GetCategoryById(int id)
         {
-            try
-            {
-                return await _categoryRepository.GetBy(catId);
-            }
-            catch (Exception e)
-            {
-                BadRequest("Category not found! " + e.Message);
-                return null;
-            }
+            return await _categoryService.GetCategoryById(id);
         }
 
 
@@ -74,14 +53,7 @@ namespace windows_backend.Controllers
         [HttpPost("Category")]
         public async Task AddCategory(Category category)
         {
-            try
-            {
-                await _categoryRepository.Add(category);
-            }
-            catch (Exception e)
-            {
-                BadRequest("Category not added! " + e.Message);
-            }
+            await _categoryService.AddCategory(category);
         }
 
 
@@ -92,18 +64,11 @@ namespace windows_backend.Controllers
         [HttpDelete("Category")]
         public async Task DeleteCategory(Category category)
         {
-            try
-            {
-                await _categoryRepository.Delete(category);
-            }
-            catch (Exception e)
-            {
-                BadRequest("Category not deleted! " + e.Message);
-            }
+            await _categoryService.DeleteCategory(category);
         }
         #endregion
 
-        #region items
+        #region Items
         // GET: api/Items
         /// <summary>
         /// Get all items 
@@ -112,15 +77,7 @@ namespace windows_backend.Controllers
         [HttpGet("Items")]
         public async Task<IEnumerable<Item>> GetItems()
         {
-            try
-            {
-                return await _itemRepository.GetAll();
-            }
-            catch (Exception e)
-            {
-                BadRequest("Items not found! " + e.Message);
-                return null;
-            }
+            return await _categoryService.GetItems();
         }
 
         //GET: api/GetItemById
@@ -129,17 +86,9 @@ namespace windows_backend.Controllers
         /// </summary>
         /// <returns>Item</returns>
         [HttpGet("Item")]
-        public async Task<Item> GetItemById(int itemId)
+        public async Task<Item> GetItemById(int id)
         {
-            try
-            {
-                return await _itemRepository.GetBy(itemId);
-            }
-            catch (Exception e)
-            {
-                BadRequest("Item not found! " + e.Message);
-                return null;
-            }
+            return await _categoryService.GetItemById(id);
         }
 
         //POST: api/AddItem
@@ -147,16 +96,9 @@ namespace windows_backend.Controllers
         /// Add Item
         /// </summary>
         [HttpPost("Item")]
-        public async Task AddItem(Item Item)
+        public async Task AddItem(Item item)
         {
-            try
-            {
-                await _itemRepository.Add(Item);
-            }
-            catch (Exception e)
-            {
-                BadRequest("Item not added! " + e.Message);
-            }
+            await _categoryService.AddItem(item);
         }
 
 
@@ -165,16 +107,9 @@ namespace windows_backend.Controllers
         /// Delete Item 
         /// </summary>
         [HttpDelete("Item")]
-        public async Task DeleteItem(Item Item)
+        public async Task DeleteItem(Item item)
         {
-            try
-            {
-                await _itemRepository.Delete(Item);
-            }
-            catch (Exception e)
-            {
-                BadRequest("Item not deleted! " + e.Message);
-            }
+            await _categoryService.DeleteItem(item);
         }
         #endregion
 
@@ -187,15 +122,7 @@ namespace windows_backend.Controllers
         [HttpGet("Tasks")]
         public async Task<IEnumerable<ItemTask>> GetTasks()
         {
-            try
-            {
-                return await _taskRepository.GetAll();
-            }
-            catch (Exception e)
-            {
-                BadRequest("Tasks not found! " + e.Message);
-                return null;
-            }
+            return await _categoryService.GetTasks();
         }
 
         //GET: api/GetTaskById
@@ -204,17 +131,9 @@ namespace windows_backend.Controllers
         /// </summary>
         /// <returns>Task</returns>
         [HttpGet("TaskById")]
-        public async Task<ItemTask> GetTaskById(int TaskId)
+        public async Task<ItemTask> GetTaskById(int id)
         {
-            try
-            {
-                return await _taskRepository.GetBy(TaskId);
-            }
-            catch (Exception e)
-            {
-                BadRequest("Task not found! " + e.Message);
-                return null;
-            }
+            return await _categoryService.GetTaskById(id);
         }
 
         //POST: api/AddTask
@@ -222,16 +141,9 @@ namespace windows_backend.Controllers
         /// Add Task
         /// </summary>
         [HttpPost("Task")]
-        public async Task AddTask(ItemTask itemTask)
+        public async Task AddTask(ItemTask task)
         {
-            try
-            {
-                await _taskRepository.Add(itemTask);
-            }
-            catch (Exception e)
-            {
-                BadRequest("Task not added! " + e.Message);
-            }
+            await _categoryService.AddTask(task);
         }
 
 
@@ -240,16 +152,9 @@ namespace windows_backend.Controllers
         /// Delete Task 
         /// </summary>
         [HttpDelete("Task")]
-        public async Task DeleteTask(ItemTask itemTask)
+        public async Task DeleteTask(ItemTask task)
         {
-            try
-            {
-                await _taskRepository.Delete(itemTask);
-            }
-            catch (Exception e)
-            {
-                BadRequest("Task not deleted! " + e.Message);
-            }
+            await _categoryService.DeleteTask(task);
         }
         #endregion
     }

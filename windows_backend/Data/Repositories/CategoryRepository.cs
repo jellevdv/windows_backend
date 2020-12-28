@@ -26,7 +26,7 @@ namespace windows_backend.Data.Repositories
                 throw new ArgumentException("Category is already in the database!");
             }
             await _categories.AddAsync(category);
-            _context.SaveChanges();
+            await SaveChanges();
         }
 
 
@@ -35,7 +35,7 @@ namespace windows_backend.Data.Repositories
             if (await _categories.ContainsAsync(category))
             {
                 _categories.Remove(category);
-                _context.SaveChanges();
+                await SaveChanges();
             }
             else
             {
@@ -45,21 +45,13 @@ namespace windows_backend.Data.Repositories
 
         public async Task<List<Category>> GetAll()
         {
-            return await _categories.OrderBy(t => t.id).ToListAsync();
+            return await _categories.OrderBy(t => t.Id).ToListAsync();
         }
 
         public async Task<Category> GetBy(int id)
         {
-            return await _categories.SingleOrDefaultAsync(c => c.id == id);
+            return await _categories.SingleOrDefaultAsync(c => c.Id == id);
         }
-
-
-        public async Task<List<Category>> GetByHoliday(int holidayId)
-        {
-            return null;
-            //   return await _categories.Where(c => c.Holidays.id  == holidayId).ToListAsync();
-        }
-
 
         public async Task SaveChanges()
         {

@@ -13,7 +13,8 @@ namespace windows_backend.Models
 
         #region Properties
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int id { get; set; }
+        public int Id { get; set; }
+        public int ItemId { get; set; }
         public string Description {
             get
             {
